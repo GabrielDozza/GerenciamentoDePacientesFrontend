@@ -1,34 +1,63 @@
 import "./styles.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
+import { useMemo, useState } from "react";
+import { BackButton } from "../../components/BackButton";
 
 export function Patients() {
+
   const navigate = useNavigate();
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   const patients = [
     {
       id: 1,
       name: "Maria Silva",
+      birthDate: "15/03/1985",
       phone: "(51) 99999-9999",
       email: "maria@email.com",
+      cpf: "111.111.111-11",
+      address: "Rua das Flores, 120",
       profession: "Psicóloga",
+      origin: "Rio de Janeiro, BR",
     },
 
     {
       id: 2,
       name: "João Pereira",
+      birthDate: "20/07/1980",
       phone: "(51) 98888-8888",
       email: "joao@email.com",
+      cpf: "222.222.222-22",
+      address: "Av. Central, 450",
       profession: "Dentista",
+      origin: "São Paulo, BR",
     },
 
     {
       id: 3,
       name: "Ana Costa",
+      birthDate: "10/12/1985",
       phone: "(51) 97777-7777",
       email: "ana@email.com",
+      cpf: "333.333.333-33",
+      address: "Rua Verde, 89",
       profession: "Fisioterapeuta",
+      origin: "Porto Alegre, BR",
     },
   ];
+
+  const filteredPatients = useMemo(
+    () =>
+      patients.filter((patient) =>
+        patient.name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      ),
+
+    [patients, searchTerm],
+  );
 
   return (
     <div className="patients-container">
@@ -38,24 +67,51 @@ export function Patients() {
         <h2>Lume</h2>
 
         <nav>
-          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
-             Dashboard
-            </NavLink>
-          <NavLink to="/patients" className={({ isActive }) => isActive ? "active" : ""}>
+
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "active" : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+
+          <NavLink
+            to="/patients"
+            className={({ isActive }) =>
+              isActive ? "active" : ""
+            }
+          >
             Pacientes
           </NavLink>
-          <NavLink to="/agenda" className={({ isActive }) => isActive ? "active" : ""}>
+
+          <NavLink
+            to="/agenda"
+            className={({ isActive }) =>
+              isActive ? "active" : ""
+            }
+          >
             Agenda
           </NavLink>
-          <NavLink to="/evolutions" className={({ isActive }) => isActive ? "active" : ""}>
+
+          <NavLink
+            to="/evolutions"
+            className={({ isActive }) =>
+              isActive ? "active" : ""
+            }
+          >
             Evoluções
           </NavLink>
+
         </nav>
 
         <div className="profile">
+
           <FaUserCircle className="user-icon" />
 
           <p>Gabriel</p>
+
         </div>
 
       </aside>
@@ -63,11 +119,9 @@ export function Patients() {
       <main className="content">
 
         <header className="patients-header">
-            <button
-            className="back-button"
-        onClick={() => navigate(-1)}>
-                x 
-            </button>
+
+          <BackButton/>
+
           <h1>Pacientes</h1>
 
           <div className="header-actions">
@@ -75,9 +129,16 @@ export function Patients() {
             <input
               type="text"
               placeholder="Buscar paciente..."
+              value={searchTerm}
+              onChange={(event) =>
+                setSearchTerm(event.target.value)
+              }
             />
 
-            <button className="new-patient-btn" onClick={() => navigate("/new-patient")}>
+            <button
+              className="new-patient-btn"
+              onClick={() => navigate("/new-patient")}
+            >
               + Novo Paciente
             </button>
 
@@ -87,33 +148,70 @@ export function Patients() {
 
         <section className="patients-grid">
 
-          {patients.map((patient) => (
+          {filteredPatients.map((patient) => (
 
-            <div className="patient-card" key={patient.id}>
+            <div
+              className="patient-card"
+              key={patient.id}
+            >
 
               <FaUserCircle className="patient-icon" />
 
               <h3>{patient.name}</h3>
 
-              <p>{patient.phone}</p>
+              <p>
+                <strong>Nascimento:</strong>{" "}
+                {patient.birthDate}
+              </p>
 
-              <p>{patient.email}</p>
+              <p>
+                <strong>Telefone:</strong>{" "}
+                {patient.phone}
+              </p>
 
-              <span>{patient.profession}</span>
+              <p>
+                <strong>E-mail:</strong>{" "}
+                {patient.email}
+              </p>
+
+              <p>
+                <strong>CPF:</strong>{" "}
+                {patient.cpf}
+              </p>
+
+              <p>
+                <strong>Endereço:</strong>{" "}
+                {patient.address}
+              </p>
+
+              <p>
+                <strong>Profissão:</strong>{" "}
+                {patient.profession}
+              </p>
+
+              <p>
+                <strong>Origem:</strong>{" "}
+                {patient.origin}
+              </p>
 
               <div className="card-buttons">
 
-                <button onClick={() => navigate("/patient-details")}>
+                <button
+                  onClick={() =>
+                    navigate("/patient-details")
+                  }
+                >
                   Ver detalhes
                 </button>
 
-                <button onClick={() => navigate("/edit-patient")}>
+                <button>
                   Editar
                 </button>
 
               </div>
 
             </div>
+
           ))}
 
         </section>

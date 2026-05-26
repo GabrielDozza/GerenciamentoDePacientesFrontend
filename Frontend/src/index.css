@@ -153,6 +153,70 @@ html {
   color: #64748B;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  min-height: 45px;
+  border: none;
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 14px 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.button-primary,
+.button-secondary {
+  min-width: 150px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.button-primary {
+  background: #1E6B3A;
+  color: white;
+}
+
+.button-secondary {
+  background: #F1F5F9;
+  color: #1E293B;
+}
+
 .sidebar a,
 .sidebar button {
   display: inline-flex;

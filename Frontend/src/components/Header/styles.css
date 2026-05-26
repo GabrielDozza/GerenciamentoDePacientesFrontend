@@ -7,10 +7,11 @@
 }
 
 .header input {
-  width: 280px;
+  width: 300px;
   height: 45px;
 
-  border: 1px solid #CBD5E1;
+  border: none;
+  background: #f8f8f8;
 
   border-radius: 12px;
 
