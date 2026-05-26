@@ -1,7 +1,29 @@
+import { Routes, Route } from "react-router-dom";
+
 import { Home } from "./pages/Home";
+import { Dashboard } from "./pages/Dashboard";
+import { Patients } from "./pages/Patients";
+import { PatientDetails } from "./pages/PatientDetails";
+import { NewPatient } from "./pages/NewPatient";
+import { EditPatient } from "./pages/EditPatient";
+import { NewEvent } from "./pages/NewEvent";
+import { NewEvolution } from "./pages/NewEvolution";
+import { Login } from "./pages/Login";
 
 function App() {
-  return <Home />;
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/patients" element={<Patients />} />
+      <Route path="/patient-details" element={<PatientDetails />} />
+      <Route path="/new-patient" element={<NewPatient />} />
+      <Route path="/edit-patient" element={<EditPatient />} />
+      <Route path="/schedule" element={<NewEvent />} />
+      <Route path="/evolutions" element={<NewEvolution />} />
+    </Routes>
+  );
 }
 
 export default App;

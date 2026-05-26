@@ -18,7 +18,7 @@
 .sidebar {
   width: 250px;
 
-  background: #EED9C4;
+  background: #05c07c;
 
   padding: 24px;
 
@@ -30,7 +30,7 @@
 .sidebar h2 {
   font-size: 28px;
 
-  color: #1E6B3A;
+  color: #1E293B;
 }
 
 .sidebar nav {
@@ -47,13 +47,21 @@
 
   border: none;
 
-  border-radius: 12px;
+  background: transparent;
 
-  background: white;
+  color: #ffffff;
+
+  text-align: left;
+
+  padding-left: 16px;
+
+  border-radius: 12px;
 
   cursor: pointer;
 
-  font-weight: bold;
+  font-size: 16px;
+
+  transition: 0.2s;
 }
 
 .profile {
@@ -61,6 +69,8 @@
   align-items: center;
 
   gap: 12px;
+
+  color: white;
 }
 
 .profile img {
@@ -130,6 +140,11 @@
 .user-icon {
   font-size: 45px;
 
-  color: #1E6B3A;
+  color: #CBD5E1;
 }
 
+.sidebar button:hover {
+  background: #1E6B3A;
+
+  color: white;
+}

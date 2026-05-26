@@ -1,6 +1,8 @@
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 export function Dashboard() {
+  const navigate = useNavigate();
   return (
     <div className="dashboard-container">
         <h1>Dashboard</h1>
@@ -8,10 +10,18 @@ export function Dashboard() {
         <h2>Lume</h2>
 
         <nav>
-          <button>Dashboard</button>
-          <button>Pacientes</button>
-          <button>Agenda</button>
-          <button>Evoluções</button>
+          <button onClick={() => navigate("/")}>
+              Dashboard
+          </button>
+          <button onClick={() => navigate("/patients")}>
+            Pacientes
+          </button>
+          <button onClick={() => navigate("/schedule")}>
+            Agenda
+          </button>
+          <button onClick={() => navigate("/evolutions")}>
+            Evoluções
+          </button>
         </nav>
 
         <div className="profile">
