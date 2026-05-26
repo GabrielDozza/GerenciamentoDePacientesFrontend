@@ -9,6 +9,8 @@ import { EditPatient } from "./pages/EditPatient";
 import { NewEvent } from "./pages/NewEvent";
 import { NewEvolution } from "./pages/NewEvolution";
 import { Login } from "./pages/Login";
+import {Agenda} from "./pages/Agenda";
+import { Evolutions } from "./pages/Evolutions";
 
 function App() {
   return (
@@ -20,8 +22,10 @@ function App() {
       <Route path="/patient-details" element={<PatientDetails />} />
       <Route path="/new-patient" element={<NewPatient />} />
       <Route path="/edit-patient" element={<EditPatient />} />
-      <Route path="/schedule" element={<NewEvent />} />
-      <Route path="/evolutions" element={<NewEvolution />} />
+      <Route path="/new-event" element={<NewEvent />} />
+      <Route path="/evolutions" element={<Evolutions />} />
+      <Route path="/new-evolution" element={<NewEvolution />} />
+      <Route path="/agenda" element={<Agenda />} />
     </Routes>
   );
 }

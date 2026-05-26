@@ -1,70 +1,49 @@
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function Dashboard() {
-  const navigate = useNavigate();
   return (
     <div className="dashboard-container">
-        <h1>Dashboard</h1>
       <aside className="sidebar">
         <h2>Lume</h2>
 
         <nav>
-          <button onClick={() => navigate("/")}>
-              Dashboard
-          </button>
-          <button onClick={() => navigate("/patients")}>
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
+            Dashboard
+          </NavLink>
+          <NavLink to="/patients" className={({ isActive }) => isActive ? "active" : ""}>
             Pacientes
-          </button>
-          <button onClick={() => navigate("/schedule")}>
+          </NavLink>
+          <NavLink to="/agenda" className={({ isActive }) => isActive ? "active" : ""}>
             Agenda
-          </button>
-          <button onClick={() => navigate("/evolutions")}>
+          </NavLink>
+          <NavLink to="/evolutions" className={({ isActive }) => isActive ? "active" : ""}>
             Evoluções
-          </button>
+          </NavLink>
         </nav>
-
-        <div className="profile">
-          <img
-            src="https://i.pravatar.cc/100"
-            alt="profile"
-          />
-
-          <p>Gabriel</p>
-        </div>
       </aside>
 
       <main className="content">
-
         <header className="header">
           <h1>Dashboard</h1>
-
-          <input
-            type="text"
-            placeholder="Buscar paciente..."
-          />
+          <input type="text" placeholder="Buscar paciente..." />
         </header>
 
         <section className="cards">
-
           <div className="card">
             <h3>Pacientes</h3>
             <p>24 cadastrados</p>
           </div>
-
           <div className="card">
             <h3>Consultas</h3>
             <p>8 hoje</p>
           </div>
-
           <div className="card">
             <h3>Evoluções</h3>
             <p>15 registradas</p>
           </div>
-
         </section>
-
       </main>
     </div>
   );
-}
+} 

@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
 export function Patients() {
@@ -38,20 +38,18 @@ export function Patients() {
         <h2>Lume</h2>
 
         <nav>
-          <button onClick={() => navigate("/")}>
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
              Dashboard
-            </button>
-          <button className="active">
+            </NavLink>
+          <NavLink to="/patients" className={({ isActive }) => isActive ? "active" : ""}>
             Pacientes
-          </button>
-
-          <button onClick={() => navigate("/schedule")}>
+          </NavLink>
+          <NavLink to="/agenda" className={({ isActive }) => isActive ? "active" : ""}>
             Agenda
-          </button>
-
-          <button onClick={() => navigate("/evolutions")}>
+          </NavLink>
+          <NavLink to="/evolutions" className={({ isActive }) => isActive ? "active" : ""}>
             Evoluções
-          </button>
+          </NavLink>
         </nav>
 
         <div className="profile">

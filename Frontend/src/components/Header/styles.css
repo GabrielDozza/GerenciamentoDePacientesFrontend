@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 32px;
+}
+
+.header input {
+  width: 280px;
+  height: 45px;
+
+  border: 1px solid #CBD5E1;
+
+  border-radius: 12px;
+
+  padding: 0 16px;
+
+  outline: none;
+}
