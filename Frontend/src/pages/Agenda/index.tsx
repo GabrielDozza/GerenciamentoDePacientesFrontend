@@ -11,20 +11,19 @@ export function Agenda() {
     {
       id: 1,
       patient: "Maria Silva",
-      title: "Consulta",
-      time: "09:00",
+      title: "Consulta inicial",
+      date: "10/06/2026",
+      startTime: "14:00",
+      endTime: "15:00",
     },
+
     {
       id: 2,
       patient: "João Pereira",
       title: "Retorno",
-      time: "11:00",
-    },
-    {
-      id: 3,
-      patient: "Ana Costa",
-      title: "Avaliação",
-      time: "14:00",
+      date: "11/06/2026",
+      startTime: "10:00",
+      endTime: "11:00",
     },
   ];
 
@@ -45,14 +44,47 @@ export function Agenda() {
         <p>Cadastre um novo evento para começar.</p>
       </div>
       ) : (
-          events.map((event) => (
-          <div className="event-card" key={event.id}>
-            <h3>{event.title}</h3>
-            <p>{event.patient}</p>
-            <span>{event.time}</span>
-          </div>
-        )))}
+           events.map((event) => (
+
+            <div
+              className="event-card"
+              key={event.id}
+            >
+
+              <h3>{event.title}</h3>
+
+              <p>
+                <strong>Paciente:</strong>
+                {" "}
+                {event.patient}
+              </p>
+
+              <p>
+                <strong>Data:</strong>
+                {" "}
+                {event.date}
+              </p>
+
+              <p>
+                <strong>Início:</strong>
+                {" "}
+                {event.startTime}
+              </p>
+
+              <p>
+                <strong>Término:</strong>
+                {" "}
+                {event.endTime}
+              </p>
+
+            </div>
+
+          ))
+
+        )}
+
       </div>
+
     </Layout>
   );
 }

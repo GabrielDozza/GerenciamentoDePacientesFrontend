@@ -11,42 +11,65 @@ export function Patients() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [patients, setPatients] = useState([
-    {
-      id: 1,
-      name: "Maria Silva",
-      birthDate: "15/03/1985",
-      phone: "(51) 99999-9999",
-      email: "maria@email.com",
-      cpf: "111.111.111-11",
-      address: "Rua das Flores, 120",
-      profession: "Psicóloga",
-      origin: "Rio de Janeiro, BR",
-    },
+  {
+    id: 1,
+    name: "Maria Silva",
+    birthDate: "15/03/1985",
+    phone: "(51) 99999-9999",
+    email: "maria@email.com",
+    cpf: "111.111.111-11",
+    address: "Rua das Flores, 120",
+    profession: "Psicóloga",
+    origin: "Rio de Janeiro, BR",
 
-    {
-      id: 2,
-      name: "João Pereira",
-      birthDate: "20/07/1980",
-      phone: "(51) 98888-8888",
-      email: "joao@email.com",
-      cpf: "222.222.222-22",
-      address: "Av. Central, 450",
-      profession: "Dentista",
-      origin: "São Paulo, BR",
-    },
+    events: [
+      {
+        id: 1,
+        title: "Consulta inicial",
+        date: "10/06/2026",
+        startTime: "14:00",
+        endTime: "15:00",
+      },
 
-    {
-      id: 3,
-      name: "Ana Costa",
-      birthDate: "10/12/1985",
-      phone: "(51) 97777-7777",
-      email: "ana@email.com",
-      cpf: "333.333.333-33",
-      address: "Rua Verde, 89",
-      profession: "Fisioterapeuta",
-      origin: "Porto Alegre, BR",
-    },
-  ]);
+    ],
+  },
+
+  {
+    id: 2,
+    name: "João Pereira",
+    birthDate: "20/07/1980",
+    phone: "(51) 98888-8888",
+    email: "joao@email.com",
+    cpf: "222.222.222-22",
+    address: "Av. Central, 450",
+    profession: "Dentista",
+    origin: "São Paulo, BR",
+
+    events: [
+      {
+        id: 1,
+        title: "Avaliação",
+        date: "11/06/2026",
+        startTime: "10:00",
+        endTime: "11:00",
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    name: "Ana Costa",
+    birthDate: "10/12/1985",
+    phone: "(51) 97777-7777",
+    email: "ana@email.com",
+    cpf: "333.333.333-33",
+    address: "Rua Verde, 89",
+    profession: "Fisioterapeuta",
+    origin: "Porto Alegre, BR",
+
+    events: [],
+  },
+]);
 
   const filteredPatients = useMemo(
     () =>
@@ -210,13 +233,15 @@ export function Patients() {
 
               <div className="card-buttons">
 
-                <button
-                  onClick={() =>
-                    navigate("/patient-details")
-                  }
-                >
-                  Ver detalhes
-                </button>
+              <button
+              onClick={() =>
+              navigate("/patient-details", {
+              state: patient,
+              })
+              }
+              >
+              Ver detalhes
+              </button>
 
                 <button
                   onClick={() =>

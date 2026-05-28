@@ -6,9 +6,11 @@ import { BackButton } from "../../components/BackButton";
 
 export function NewEvent() {
   const navigate = useNavigate();
-  const [patient, setPatient] = useState("");
   const [title, setTitle] = useState("");
-  const [time, setTime] = useState("");
+  const [patient, setPatient] = useState("");
+  const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,8 +32,16 @@ export function NewEvent() {
           <input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Consulta / Retorno" />
         </div>
         <div className="form-group">
-          <label>Horário</label>
-          <input value={time} onChange={(event) => setTime(event.target.value)} placeholder="09:00" />
+          <label>Data</label>
+          <input value={date} onChange={(event) => setDate(event.target.value)} placeholder="25/05/2026" />
+        </div>
+        <div className="form-group">
+          <label>Horário de Início</label>
+          <input value={startTime} onChange={(event) => setStartTime(event.target.value)} placeholder="09:00" />
+        </div>
+        <div className="form-group">
+          <label>Horário de Término</label>
+          <input value={endTime} onChange={(event) => setEndTime(event.target.value)} placeholder="10:00" />
         </div>
         <div className="form-actions">
           <button type="button" className="button-secondary" onClick={() => navigate(-1)}>
