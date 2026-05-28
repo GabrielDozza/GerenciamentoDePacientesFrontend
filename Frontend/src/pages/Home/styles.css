@@ -6,11 +6,11 @@
 }
 
 .home-container {
-  background: #F5EDE7;
+  background: white;
 }
 
 .sidebar {
-  background: #05c07c;
+  background: rgb(1, 153, 80);
 }
 
 .sidebar a {
@@ -29,5 +29,5 @@
 
 .user-icon {
   font-size: 45px;
-  color: #CBD5E1;
+  color: white;
 }

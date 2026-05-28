@@ -11,7 +11,7 @@
 
   border: none;
 
-  background: #1E6B3A;
+  background: rgb(1, 153, 80);
 
   color: white;
 
@@ -38,25 +38,28 @@
 
   border-radius: 18px;
 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 2px solid var(--border);
+  border-color: rgb(1, 153, 80);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.068);
 }
 
 .event-card h3 {
-  color: #1E293B;
+  color: black;
 
   margin-bottom: 8px;
 }
 
 .event-card p {
-  color: #64748B;
+  color: rgb(21, 21, 21);
 
   margin-bottom: 12px;
 }
 
 .event-card span {
-  background: #DCFCE7;
+  background: rgb(1, 153, 80);
 
-  color: #166534;
+  color: white;
 
   padding: 6px 12px;
 
