@@ -148,7 +148,21 @@ export function Patients() {
 
         <section className="patients-grid">
 
-          {filteredPatients.map((patient) => (
+  {filteredPatients.length === 0 ? (
+
+    <div className="empty-state">
+
+      <h2>Nenhum paciente encontrado</h2>
+
+      <p>
+        Cadastre um novo paciente para começar.
+      </p>
+
+    </div>
+
+  ) : (
+
+    filteredPatients.map((patient) => (
 
             <div
               className="patient-card"
@@ -216,7 +230,7 @@ export function Patients() {
 
             </div>
 
-          ))}
+          )))}
 
         </section>
 

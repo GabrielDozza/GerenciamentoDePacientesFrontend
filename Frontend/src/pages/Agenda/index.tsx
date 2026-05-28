@@ -39,13 +39,19 @@ export function Agenda() {
       </div>
 
       <div className="events-list">
-        {events.map((event) => (
+        {events.length === 0 ? (
+        <div className="empty-state">
+        <h2>Nenhum evento cadastrado</h2>
+        <p>Cadastre um novo evento para começar.</p>
+      </div>
+      ) : (
+          events.map((event) => (
           <div className="event-card" key={event.id}>
             <h3>{event.title}</h3>
             <p>{event.patient}</p>
             <span>{event.time}</span>
           </div>
-        ))}
+        )))}
       </div>
     </Layout>
   );

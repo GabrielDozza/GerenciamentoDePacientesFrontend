@@ -33,13 +33,18 @@ export function Evolutions() {
       </div>
 
       <div className="events-list">
-        {evolutions.map((evolution) => (
+        {evolutions.length === 0 ? (
+        <div className="empty-state">
+        <h2>Nenhuma evolução encontrada</h2>
+      </div>
+      ) : (
+          evolutions.map((evolution) => (
           <div className="event-card" key={evolution.id}>
             <h3>{evolution.patient}</h3>
             <p>{evolution.description}</p>
             <span>{evolution.date}</span>
           </div>
-        ))}
+        )))}
       </div>
     </Layout>
   );
