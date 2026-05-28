@@ -22,7 +22,7 @@ export function NewPatient() {
 
   return (
     <Layout>
-      <Header title="Novo Paciente" />
+      <Header title="Novo Paciente" showSearch={false} />
       <BackButton />
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">

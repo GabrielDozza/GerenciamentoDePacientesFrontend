@@ -17,7 +17,7 @@ export function NewEvolution() {
 
   return (
     <Layout>
-      <Header title="Nova Evolução" />
+      <Header title="Nova Evolução" showSearch={false} />
       <BackButton />
 
       <form className="form-container" onSubmit={handleSubmit}>

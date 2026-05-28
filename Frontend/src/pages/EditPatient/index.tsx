@@ -38,7 +38,10 @@ export function EditPatient() {
 
   return (
     <Layout>
-      <Header title="Editar Paciente" />
+      <Header
+        title="Editar Paciente"
+        showSearch={false}
+      />
       <BackButton />
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">

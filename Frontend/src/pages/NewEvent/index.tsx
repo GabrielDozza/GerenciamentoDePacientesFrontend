@@ -17,7 +17,8 @@ export function NewEvent() {
 
   return (
     <Layout>
-      <Header title="Novo Evento" />
+      <Header title="Novo Evento" showSearch={false} />
+
       <BackButton />
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">

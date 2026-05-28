@@ -8,7 +8,7 @@ export function PatientDetails() {
 
   return (
     <Layout>
-      <Header title="Detalhes do Paciente" />
+      <Header title="Detalhes do Paciente" showSearch={false} />
       <BackButton />
       <div className="form-container">
         <div className="form-group">

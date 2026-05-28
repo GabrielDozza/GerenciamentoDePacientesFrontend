@@ -1,20 +1,26 @@
 import "./styles.css";
 
-type Props = {
+interface HeaderProps {
   title: string;
-};
+  showSearch?: boolean;
+}
 
-export function Header({ title }: Props) {
+export function Header({
+  title,
+  showSearch = true,
+}: HeaderProps) {
 
   return (
     <header className="header">
 
       <h1>{title}</h1>
 
-      <input
-        type="text"
-        placeholder="Buscar..."
-      />
+      {showSearch && (
+        <input
+          type="text"
+          placeholder="Buscar..."
+        />
+      )}
 
     </header>
   );
