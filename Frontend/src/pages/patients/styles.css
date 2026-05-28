@@ -154,3 +154,13 @@
 .empty-state p {
   color: #64748B;
 }
+
+.delete-button {
+  background: #DC2626;
+
+  color: rgb(5, 5, 5);
+}
+
+.delete-button:hover {
+  background: #B91C1C;
+}

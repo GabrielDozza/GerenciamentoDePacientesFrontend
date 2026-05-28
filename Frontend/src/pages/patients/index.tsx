@@ -10,7 +10,7 @@ export function Patients() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const patients = [
+  const [patients, setPatients] = useState([
     {
       id: 1,
       name: "Maria Silva",
@@ -46,7 +46,7 @@ export function Patients() {
       profession: "Fisioterapeuta",
       origin: "Porto Alegre, BR",
     },
-  ];
+  ]);
 
   const filteredPatients = useMemo(
     () =>
@@ -224,6 +224,10 @@ export function Patients() {
                   }
                 >
                   Editar
+                </button>
+
+                <button className="delete-button">
+                  Excluir
                 </button>
 
               </div>
