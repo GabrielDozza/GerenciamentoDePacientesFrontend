@@ -14,7 +14,7 @@
 }
 
 .sidebar a {
-  color: #1E293B;
+  color: black;
 }
 
 .content {
@@ -46,7 +46,7 @@
 .new-patient-btn {
   height: 45px;
   border: none;
-  background: #1E6B3A;
+  background: rgb(1, 153, 80);
   color: white;
   padding: 0 20px;
   border-radius: 12px;
@@ -73,21 +73,21 @@
 
 .patient-icon {
   font-size: 60px;
-  color: #1E6B3A;
+  color: rgb(1, 153, 80);
 }
 
 .patient-card h3 {
-  color: #1E293B;
+  color: black;
 }
 
 .patient-card p {
-  color: #64748B;
+  color: black;
   font-size: 14px;
 }
 
 .patient-card span {
-  background: #DCFCE7;
-  color: #166534;
+  background: white;
+  color: rgb(1, 153, 80);
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 12px;
@@ -119,7 +119,7 @@
   width: fit-content;
   border: none;
   background: transparent;
-  color: #1E6B3A;
+  color: rgb(1, 153, 80);
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -146,12 +146,13 @@
 }
 
 .empty-state h2 {
-  color: #1E293B;
+  color: black;
 
   margin-bottom: 12px;
 }
 
 .empty-state p {
+<<<<<<< HEAD
   color: #64748B;
 }
 
@@ -163,4 +164,7 @@
 
 .delete-button:hover {
   background: #B91C1C;
+=======
+  color: black;
+>>>>>>> edu
 }

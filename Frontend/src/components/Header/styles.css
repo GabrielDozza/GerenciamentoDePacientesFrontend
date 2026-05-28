@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  
   margin-bottom: 32px;
 }
 
@@ -11,11 +11,15 @@
   height: 45px;
 
   border: none;
-  background: #f8f8f8;
+  background: #e9e2e284; /*botao pesquisa menos do paciente*/
 
   border-radius: 12px;
 
   padding: 0 16px;
 
   outline: none;
+}
+
+h1 {
+  color: black;
 }
