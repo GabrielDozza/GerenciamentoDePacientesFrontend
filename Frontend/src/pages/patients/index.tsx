@@ -204,7 +204,11 @@ export function Patients() {
                   Ver detalhes
                 </button>
 
-                <button>
+                <button
+                  onClick={() =>
+                    navigate("/edit-patient", { state: { patient } })
+                  }
+                >
                   Editar
                 </button>
 
