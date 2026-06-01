@@ -16,6 +16,31 @@ export function PatientDetails() {
 
   const patient = location.state;
 
+  const evolutions = [
+    {
+      id: 1,
+      patientId: 1,
+      description: "Paciente apresentou melhora significativa.",
+      date: "25/05/2026",
+    },
+    {
+      id: 2,
+      patientId: 2,
+      description: "Relatou dores musculares.",
+      date: "24/05/2026",
+    },
+    {
+      id: 3,
+      patientId: 1,
+      description: "Reavaliação com estabilidade clínica.",
+      date: "28/05/2026",
+    },
+  ];
+
+  const patientEvolutions = evolutions.filter(
+    (evolution) => evolution.patientId === patient?.id,
+  );
+
   if (!patient) {
 
     return (
@@ -150,6 +175,21 @@ export function PatientDetails() {
 
           )}
 
+        </section>
+
+        <section className="patient-evolutions">
+          <h2>Evoluções do paciente</h2>
+
+          {patientEvolutions.length === 0 ? (
+            <p>Nenhuma evolução encontrada para este paciente.</p>
+          ) : (
+            patientEvolutions.map((evolution) => (
+              <div className="event-item" key={evolution.id}>
+                <p>{evolution.date}</p>
+                <p>{evolution.description}</p>
+              </div>
+            ))
+          )}
         </section>
 
         <div className="form-actions">

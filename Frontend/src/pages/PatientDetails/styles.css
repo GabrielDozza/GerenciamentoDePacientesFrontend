@@ -1,0 +1,31 @@
+.patient-events,
+.patient-evolutions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.patient-events h2,
+.patient-evolutions h2 {
+  margin-bottom: 12px;
+  color: #1E293B;
+}
+
+.event-item {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid rgb(1, 153, 80);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.068);
+}
+
+.event-item h3,
+.event-item p,
+.event-item span {
+  color: #475569;
+}
+
+.event-item p {
+  margin-bottom: 8px;
+}

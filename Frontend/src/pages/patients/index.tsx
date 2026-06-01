@@ -10,7 +10,7 @@ export function Patients() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [patients, setPatients] = useState([
+  const patients = [
   {
     id: 1,
     name: "Maria Silva",
@@ -69,7 +69,7 @@ export function Patients() {
 
     events: [],
   },
-]);
+];
 
   const filteredPatients = useMemo(
     () =>
