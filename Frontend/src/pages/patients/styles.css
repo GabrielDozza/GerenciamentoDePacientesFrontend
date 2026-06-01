@@ -98,6 +98,7 @@
   display: flex;
   gap: 12px;
   margin-top: 12px;
+  
 }
 
 .card-buttons button {
@@ -109,6 +110,7 @@
   background: #E2E8F0;
   font-weight: 600;
   transition: 0.2s;
+  color: black;
 }
 
 .card-buttons button:hover {
@@ -152,8 +154,7 @@
 }
 
 .empty-state p {
-<<<<<<< HEAD
-  color: #64748B;
+  color: red;
 }
 
 .delete-button {
@@ -164,7 +165,4 @@
 
 .delete-button:hover {
   background: #B91C1C;
-=======
-  color: black;
->>>>>>> edu
 }
