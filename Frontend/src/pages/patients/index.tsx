@@ -1,9 +1,8 @@
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "../../components/Layout";
-import { DeleteButton } from "../../components/DeleteButton";
+import { Header } from "../../components/Header";
 
 const MOCK_PATIENTS = [
   { id: 1, name: "Maria Silva", birthDate: "15/03/1985", phone: "(51) 99999-9999", email: "maria@email.com", cpf: "111.111.111-11", address: "Rua das Flores, 120", profession: "Psicóloga", origin: "Rio de Janeiro, BR",
@@ -31,18 +30,16 @@ export function Patients() {
 
   return (
     <Layout>
-      <header className="patients-header">
-        <h1>Pacientes</h1>
-        <div className="header-actions">
-          <div className="search-wrapper">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Buscar paciente..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-          </div>
-          <button className="new-patient-btn" onClick={() => navigate("/new-patient")}>
+      <Header
+        title="Pacientes"
+        searchValue={searchTerm}
+        onSearch={setSearchTerm}
+        action={
+          <button className="new-patient-btn" onClick={() => navigate("/new-patient") }>
             + Novo Paciente
           </button>
-        </div>
-      </header>
+        }
+      />
 
       {filtered.length === 0 ? (
         <div className="empty-state">

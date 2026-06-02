@@ -219,36 +219,6 @@ a { text-decoration: none; }
   letter-spacing: -0.3px;
 }
 
-.header-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0 14px;
-  height: 40px;
-  width: 280px;
-  transition: border-color 0.15s;
-}
-
-.header-search:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.header-search svg { color: var(--text-light); flex-shrink: 0; }
-
-.header-search input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  color: var(--text);
-  width: 100%;
-}
-
-.header-search input::placeholder { color: var(--text-light); }
 
 /* ── Patients header ── */
 .patients-header {
@@ -264,40 +234,6 @@ a { text-decoration: none; }
   font-size: 22px;
   font-weight: 700;
 }
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* ── Search Input (standalone) ── */
-.search-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0 14px;
-  height: 40px;
-  width: 260px;
-  transition: border-color 0.15s;
-}
-.search-wrapper:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-.search-wrapper input {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  color: var(--text);
-  width: 100%;
-}
-.search-wrapper input::placeholder { color: var(--text-light); }
 
 /* ── Buttons ── */
 .btn {
@@ -744,8 +680,5 @@ a { text-decoration: none; }
   .patients-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .cards { grid-template-columns: 1fr; }
-  .header-search { width: 100%; }
   .patients-header { flex-direction: column; align-items: flex-start; }
-  .header-actions { width: 100%; }
-  .search-wrapper { width: 100%; }
 }
