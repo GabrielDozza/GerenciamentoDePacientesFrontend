@@ -2,21 +2,21 @@ import { Routes, Route } from "react-router-dom";
 
 import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard";
-import { Patients } from "./pages/Patients";
+import { Patients } from "./pages/patients";
 import { PatientDetails } from "./pages/PatientDetails";
-import { NewPatient } from "./pages/NewPatient";
+import { NewPatient } from "./pages/newPatient";
 import { EditPatient } from "./pages/EditPatient";
 import { NewEvent } from "./pages/NewEvent";
 import { NewEvolution } from "./pages/NewEvolution";
-import { Login } from "./pages/Login";
-import {Agenda} from "./pages/Agenda";
+import { Login } from "./pages/login";
+import { Agenda } from "./pages/Agenda";
 import { Evolutions } from "./pages/Evolutions";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/patients" element={<Patients />} />
       <Route path="/patient-details" element={<PatientDetails />} />

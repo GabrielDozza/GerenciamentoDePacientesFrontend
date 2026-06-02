@@ -1,46 +1,44 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../../components/Layout";
-import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 
 export function NewEvolution() {
   const navigate = useNavigate();
-  const [patient, setPatient] = useState("");
+  const location = useLocation();
+  const prefilledPatient = location.state?.patient?.name || "";
+
+  const [patient, setPatient] = useState(prefilledPatient);
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     navigate("/evolutions");
   };
 
   return (
     <Layout>
-      <Header title="Nova Evolução" showSearch={false} />
       <BackButton />
+      <h1 style={{ fontSize: 22, marginBottom: 24 }}>Nova Evolução</h1>
 
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Paciente</label>
-          <input value={patient} onChange={(event) => setPatient(event.target.value)} placeholder="Nome do paciente" />
-        </div>
-        <div className="form-group">
-          <label>Descrição</label>
-          <textarea value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Descrição da evolução" />
+          <input value={patient} onChange={(e) => setPatient(e.target.value)} placeholder="Nome do paciente" />
         </div>
         <div className="form-group">
           <label>Data</label>
-          <input value={date} onChange={(event) => setDate(event.target.value)} placeholder="25/05/2026" />
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label>Descrição / Prontuário</label>
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descreva a evolução do paciente, observações clínicas..." rows={6} />
         </div>
         <div className="form-actions">
-          <button type="button" className="button-secondary" onClick={() => navigate(-1)}>
-            Cancelar
-          </button>
-          <button type="submit" className="button-primary">
-            Salvar evolução
-          </button>
+          <button type="button" className="button-secondary" onClick={() => navigate(-1)}>Cancelar</button>
+          <button type="submit" className="button-primary">Salvar Evolução</button>
         </div>
       </form>
     </Layout>
