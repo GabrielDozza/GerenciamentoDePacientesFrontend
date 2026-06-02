@@ -1,6 +1,6 @@
 import "./styles.css";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
 import { DeleteButton } from "../../components/DeleteButton";
@@ -13,7 +13,18 @@ const INITIAL_EVOLUTIONS = [
 
 export function Evolutions() {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
   const [evolutions, setEvolutions] = useState(INITIAL_EVOLUTIONS);
+
+  const filteredEvolutions = useMemo(
+    () => evolutions.filter((evolution) =>
+      [evolution.patient, evolution.description, evolution.date]
+        .join(" ")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    ),
+    [evolutions, searchTerm]
+  );
 
   const handleDelete = (id: number, patient: string) => {
     if (window.confirm(`Excluir evolução de "${patient}"?`)) {
@@ -23,18 +34,24 @@ export function Evolutions() {
 
   return (
     <Layout>
-      <Header title="Evoluções" showSearch={false} />
+      <Header
+        title="Evoluções"
+        searchValue={searchTerm}
+        onSearch={setSearchTerm}
+        action={
+          <button className="new-button" onClick={() => navigate("/new-evolution")}>+ Nova Evolução</button>
+        }
+      />
 
       <div className="agenda-header">
         <h2>{evolutions.length} evolução{evolutions.length !== 1 ? "ções" : ""} registrada{evolutions.length !== 1 ? "s" : ""}</h2>
-        <button className="new-button" onClick={() => navigate("/new-evolution")}>+ Nova Evolução</button>
       </div>
 
       <div className="events-list">
-        {evolutions.length === 0 ? (
-          <div className="empty-state"><h2>Nenhuma evolução registrada</h2></div>
+        {filteredEvolutions.length === 0 ? (
+          <div className="empty-state"><h2>Nenhuma evolução encontrada</h2></div>
         ) : (
-          evolutions.map((ev) => (
+          filteredEvolutions.map((ev) => (
             <div className="event-card" key={ev.id}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                 <h3>{ev.patient}</h3>
