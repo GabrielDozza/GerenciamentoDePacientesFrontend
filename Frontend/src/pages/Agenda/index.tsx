@@ -1,6 +1,6 @@
 import "./styles.css";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
 import { DeleteButton } from "../../components/DeleteButton";
@@ -12,7 +12,18 @@ const INITIAL_EVENTS = [
 
 export function Agenda() {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
   const [events, setEvents] = useState(INITIAL_EVENTS);
+
+  const filteredEvents = useMemo(
+    () => events.filter((event) =>
+      [event.title, event.patient, event.date]
+        .join(" ")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    ),
+    [events, searchTerm]
+  );
 
   const handleDelete = (id: number, title: string) => {
     if (window.confirm(`Excluir evento "${title}"?`)) {
@@ -22,21 +33,27 @@ export function Agenda() {
 
   return (
     <Layout>
-      <Header title="Agenda" showSearch={false} />
+      <Header
+        title="Agenda"
+        searchValue={searchTerm}
+        onSearch={setSearchTerm}
+        action={
+          <button className="new-button" onClick={() => navigate("/new-event")}>+ Novo Evento</button>
+        }
+      />
 
       <div className="agenda-header">
         <h2>{events.length} evento{events.length !== 1 ? "s" : ""} agendado{events.length !== 1 ? "s" : ""}</h2>
-        <button className="new-button" onClick={() => navigate("/new-event")}>+ Novo Evento</button>
       </div>
 
       <div className="events-list">
-        {events.length === 0 ? (
+        {filteredEvents.length === 0 ? (
           <div className="empty-state">
-            <h2>Nenhum evento cadastrado</h2>
-            <p>Cadastre um novo evento para começar.</p>
+            <h2>Nenhum evento encontrado</h2>
+            <p>Tente outro termo ou cadastre um novo evento.</p>
           </div>
         ) : (
-          events.map((event) => (
+          filteredEvents.map((event) => (
             <div className="event-card" key={event.id}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
                 <h3>{event.title}</h3>
