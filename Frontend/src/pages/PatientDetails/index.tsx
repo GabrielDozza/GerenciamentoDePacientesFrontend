@@ -1,270 +1,122 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Layout } from "../../components/Layout";
-import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { DeleteButton } from "../../components/DeleteButton";
 import "./styles.css";
+
+const MOCK_EVOLUTIONS = [
+  { id: 1, patientId: 1, description: "Paciente apresentou melhora significativa.", date: "25/05/2026" },
+  { id: 2, patientId: 2, description: "Relatou dores musculares.", date: "24/05/2026" },
+  { id: 3, patientId: 1, description: "Reavaliação com estabilidade clínica.", date: "28/05/2026" },
+];
 
 export function PatientDetails() {
   const navigate = useNavigate();
   const location = useLocation();
   const patient = location.state;
-  const [patients, setPatients] = useState([
-    {
-      id: 1,
-      name: "Maria Silva",
-      birthDate: "15/03/1985",
-      phone: "(51) 99999-9999",
-      email: "maria@email.com",
-      cpf: "111.111.111-11",
-      address: "Rua das Flores, 120",
-      profession: "Psicóloga",
-      origin: "Rio de Janeiro, BR",
-      events: [
-        {
-          id: 1,
-          title: "Consulta inicial",
-          date: "10/06/2026",
-          startTime: "14:00",
-          endTime: "15:00",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "João Pereira",
-      birthDate: "20/07/1980",
-      phone: "(51) 98888-8888",
-      email: "joao@email.com",
-      cpf: "222.222.222-22",
-      address: "Av. Central, 450",
-      profession: "Dentista",
-      origin: "São Paulo, BR",
-      events: [
-        {
-          id: 1,
-          title: "Avaliação",
-          date: "11/06/2026",
-          startTime: "10:00",
-          endTime: "11:00",
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "Ana Costa",
-      birthDate: "10/12/1985",
-      phone: "(51) 97777-7777",
-      email: "ana@email.com",
-      cpf: "333.333.333-33",
-      address: "Rua Verde, 89",
-      profession: "Fisioterapeuta",
-      origin: "Porto Alegre, BR",
-      events: [],
-    },
-  ]);
 
-  const handleDeletePatient = () => {
-    if (window.confirm(`Tem certeza que deseja deletar o paciente ${patient?.name}? Esta ação não pode ser desfeita.`)) {
-      setPatients(patients.filter(p => p.id !== patient?.id));
-      navigate("/patients");
-    }
-  };
-
-  const evolutions = [
-    {
-      id: 1,
-      patientId: 1,
-      description: "Paciente apresentou melhora significativa.",
-      date: "25/05/2026",
-    },
-    {
-      id: 2,
-      patientId: 2,
-      description: "Relatou dores musculares.",
-      date: "24/05/2026",
-    },
-    {
-      id: 3,
-      patientId: 1,
-      description: "Reavaliação com estabilidade clínica.",
-      date: "28/05/2026",
-    },
-  ];
-
-  const patientEvolutions = evolutions.filter(
-    (evolution) => evolution.patientId === patient?.id,
-  );
+  const patientEvolutions = MOCK_EVOLUTIONS.filter((e) => e.patientId === patient?.id);
 
   if (!patient) {
-
     return (
-
       <Layout>
-
-        <Header
-          title="Paciente não encontrado"
-          showSearch={false}
-        />
-
         <BackButton />
-
-        <div className="empty-state">
-
-          <h2>Paciente não encontrado</h2>
-
-        </div>
-
+        <div className="empty-state"><h2>Paciente não encontrado</h2></div>
       </Layout>
-
     );
   }
 
+  const handleDelete = () => {
+    if (window.confirm(`Excluir paciente "${patient.name}"?`)) navigate("/patients");
+  };
+
+  const fields = [
+    { label: "Nome", value: patient.name },
+    { label: "Data de Nascimento", value: patient.birthDate },
+    { label: "CPF", value: patient.cpf },
+    { label: "Telefone", value: patient.phone },
+    { label: "E-mail", value: patient.email },
+    { label: "Endereço", value: patient.address },
+    { label: "Profissão", value: patient.profession },
+    { label: "Origem", value: patient.origin },
+  ];
+
   return (
-
     <Layout>
-
-      <Header
-        title="Detalhes do Paciente"
-        showSearch={false}
-      />
-
       <BackButton />
 
-      <div className="form-container">
-
-        <div className="form-group">
-
-          <label>Nome</label>
-
-          <p>{patient.name}</p>
-
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28, flexWrap: "wrap", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div className="patient-avatar" style={{ width: 56, height: 56, fontSize: 22 }}>{patient.name[0]}</div>
+          <div>
+            <h1 style={{ fontSize: 22 }}>{patient.name}</h1>
+            <p style={{ color: "var(--text-muted)", fontSize: 14 }}>{patient.profession} · {patient.origin}</p>
+          </div>
         </div>
-
-        <div className="form-group">
-
-          <label>Data de nascimento</label>
-
-          <p>{patient.birthDate}</p>
-
+        <div style={{ display: "flex", gap: 10 }}>
+          <button className="button-secondary" onClick={() => navigate("/new-event", { state: { patient } })}>+ Novo Evento</button>
+          <button className="button-secondary" onClick={() => navigate("/new-evolution", { state: { patient } })}>+ Nova Evolução</button>
+          <button className="button-secondary" onClick={() => navigate("/edit-patient", { state: { patient } })}>Editar</button>
+          <DeleteButton onClick={handleDelete} />
         </div>
-
-        <div className="form-group">
-
-          <label>Telefone</label>
-
-          <p>{patient.phone}</p>
-
-        </div>
-
-        <div className="form-group">
-
-          <label>E-mail</label>
-
-          <p>{patient.email}</p>
-
-        </div>
-
-        <div className="form-group">
-
-          <label>CPF</label>
-
-          <p>{patient.cpf}</p>
-
-        </div>
-
-        <div className="form-group">
-
-          <label>Endereço</label>
-
-          <p>{patient.address}</p>
-
-        </div>
-
-        <div className="form-group">
-
-          <label>Profissão</label>
-
-          <p>{patient.profession}</p>
-
-        </div>
-
-        <div className="form-group">
-          <label>Origem do paciente</label>
-          <p>{patient.origin}</p>
-        </div>
-
-        <div className="form-actions" style={{ marginTop: "2rem", justifyContent: "center" }}>
-          <button type="button" className="button-secondary" onClick={() => navigate(`/edit-patient`, { state: patient })}>
-            Editar
-          </button>
-          <DeleteButton onClick={handleDeletePatient} />
-        </div>
-
-        <section className="patient-events">
-
-          <h2>Eventos</h2>
-
-          {patient.events?.length === 0 ? (
-
-            <p>Nenhum evento encontrado.</p>
-
-          ) : (
-
-            patient.events?.map((event: any) => (
-
-              <div
-                className="event-item"
-                key={event.id}
-              >
-
-                <h3>{event.title}</h3>
-
-                <p>{event.date}</p>
-
-                <p>
-                  {event.startTime}
-                  {" - "}
-                  {event.endTime}
-                </p>
-
-              </div>
-
-            ))
-
-          )}
-
-        </section>
-
-        <section className="patient-evolutions">
-          <h2>Evoluções do paciente</h2>
-
-          {patientEvolutions.length === 0 ? (
-            <p>Nenhuma evolução encontrada para este paciente.</p>
-          ) : (
-            patientEvolutions.map((evolution) => (
-              <div className="event-item" key={evolution.id}>
-                <p>{evolution.date}</p>
-                <p>{evolution.description}</p>
-              </div>
-            ))
-          )}
-        </section>
-
-        <div className="form-actions" style={{ justifyContent: "center" }}>
-          <button
-            type="button"
-            className="button-secondary"
-            onClick={() => navigate(-1)}
-          >
-            Voltar
-          </button>
-        </div>
-
       </div>
 
-    </Layout>
+      <div className="section-card">
+        <div className="section-title">Informações Pessoais</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 24px" }}>
+          {fields.map((f) => (
+            <div className="info-row" key={f.label}>
+              <span className="info-label">{f.label}</span>
+              <span className="info-value">{f.value || "—"}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
+      <div className="section-card">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+          <div className="section-title" style={{ marginBottom: 0, paddingBottom: 0, borderBottom: "none" }}>Eventos / Consultas</div>
+          <button className="new-patient-btn" style={{ padding: "6px 12px", fontSize: 13 }} onClick={() => navigate("/new-event", { state: { patient } })}>+ Novo Evento</button>
+        </div>
+        {!patient.events?.length ? (
+          <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Nenhum evento registrado.</p>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {patient.events.map((event: any) => (
+              <div className="event-item" key={event.id}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <h3>{event.title}</h3>
+                  <span style={{ fontSize: 12, color: "var(--text-muted)", background: "var(--border-light)", padding: "2px 8px", borderRadius: 20 }}>{event.date}</span>
+                </div>
+                <p>{event.startTime} – {event.endTime}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="section-card">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+          <div className="section-title" style={{ marginBottom: 0, paddingBottom: 0, borderBottom: "none" }}>Histórico de Evoluções</div>
+          <button className="new-patient-btn" style={{ padding: "6px 12px", fontSize: 13 }} onClick={() => navigate("/new-evolution", { state: { patient } })}>+ Nova Evolução</button>
+        </div>
+        {!patientEvolutions.length ? (
+          <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Nenhuma evolução registrada.</p>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {patientEvolutions.map((ev) => (
+              <div className="event-item" key={ev.id}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                  <span className="info-label">Evolução</span>
+                  <span style={{ fontSize: 12, color: "var(--text-muted)", background: "var(--border-light)", padding: "2px 8px", borderRadius: 20 }}>{ev.date}</span>
+                </div>
+                <p style={{ fontSize: 14, color: "var(--text)" }}>{ev.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Layout>
   );
 }
