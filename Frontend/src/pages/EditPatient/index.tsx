@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout } from "../../components/Layout";
-import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 
 export function EditPatient() {
   const navigate = useNavigate();
   const location = useLocation();
-  const patient = location.state?.patient;
+  const patient = location.state?.patient ?? location.state;
 
-  const [birthDate, setBirthDate] = useState("");
   const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -21,8 +20,8 @@ export function EditPatient() {
 
   useEffect(() => {
     if (patient) {
-      setBirthDate(patient.birthDate || "");
       setName(patient.name || "");
+      setBirthDate(patient.birthDate || "");
       setPhone(patient.phone || "");
       setEmail(patient.email || "");
       setCpf(patient.cpf || "");
@@ -32,67 +31,58 @@ export function EditPatient() {
     }
   }, [patient]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     navigate("/patients");
   };
 
   return (
     <Layout>
-      <Header
-        title="Editar Paciente"
-        showSearch={false}
-      />
       <BackButton />
+      <h1 style={{ fontSize: 22, marginBottom: 24 }}>Editar Paciente</h1>
+
       <form className="form-container" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Data de nascimento</label>
-          <input type="date" value={birthDate} onChange={(event) => setBirthDate(event.target.value)}
-          />
+        <div className="form-row">
+          <div className="form-group">
+            <label>Nome completo</label>
+            <input value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label>Data de nascimento</label>
+            <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+          </div>
         </div>
-
-        <div className="form-group">
-          <label>Nome</label>
-          <input value={name} onChange={(event) => setName(event.target.value)} />
+        <div className="form-row">
+          <div className="form-group">
+            <label>CPF</label>
+            <input value={cpf} onChange={(e) => setCpf(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label>Telefone</label>
+            <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+          </div>
         </div>
-
-        <div className="form-group">
-          <label>Telefone</label>
-          <input value={phone} onChange={(event) => setPhone(event.target.value)} />
-        </div>
-
         <div className="form-group">
           <label>E-mail</label>
-          <input value={email} onChange={(event) => setEmail(event.target.value)} />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-
-        <div className="form-group">
-          <label>CPF</label>
-          <input value={cpf} onChange={(event) => setCpf(event.target.value)} />
-        </div>
-
         <div className="form-group">
           <label>Endereço</label>
-          <input value={address} onChange={(event) => setAddress(event.target.value)} />
+          <input value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
-
-        <div className="form-group">
-          <label>Profissão</label>
-          <input value={profession} onChange={(event) => setProfession(event.target.value)} />
+        <div className="form-row">
+          <div className="form-group">
+            <label>Profissão</label>
+            <input value={profession} onChange={(e) => setProfession(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label>Origem</label>
+            <input value={origin} onChange={(e) => setOrigin(e.target.value)} />
+          </div>
         </div>
-
-        <div className="form-group">
-          <label>Origem</label>
-          <input value={origin} onChange={(event) => setOrigin(event.target.value)} />
-        </div>
-
         <div className="form-actions">
-          <button type="button" className="button-secondary" onClick={() => navigate(-1)}>
-            Cancelar
-          </button>
-          <button type="submit" className="button-primary">
-            Salvar alterações
-          </button>
+          <button type="button" className="button-secondary" onClick={() => navigate(-1)}>Cancelar</button>
+          <button type="submit" className="button-primary">Salvar Alterações</button>
         </div>
       </form>
     </Layout>
