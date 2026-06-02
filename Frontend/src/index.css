@@ -1,8 +1,8 @@
 :root {
-  --primary: #2563EB;
-  --primary-dark: #1E3A8A;
-  --primary-light: #EFF6FF;
-  --primary-hover: #1D4ED8;
+  --primary: #008421;
+  --primary-dark: #166534;
+  --primary-light: #DCFCE7;
+  --primary-hover: #15803D;
   --bg: #F8FAFC;
   --surface: #FFFFFF;
   --border: #E5E7EB;
@@ -413,7 +413,7 @@ a { text-decoration: none; }
   margin-bottom: 16px;
 }
 
-.card-icon.blue { background: var(--primary-light); }
+.card-icon.green { background: var(--primary-light); }
 .card-icon.green { background: var(--success-bg); }
 .card-icon.yellow { background: var(--warning-bg); }
 

@@ -29,7 +29,7 @@ export function Dashboard() {
 
         <section className="cards">
           <div className="card">
-            <div className="card-icon blue">👥</div>
+            <div className="card-icon green">👥</div>
             <h3>Total de Pacientes</h3>
             <div className="card-value">24</div>
             <p>3 novos este mês</p>
