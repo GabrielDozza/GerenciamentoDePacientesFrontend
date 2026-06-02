@@ -11,7 +11,8 @@ export function BackButton() {
       className="back-button"
       onClick={() => navigate(-1)}
     >
-      ← Voltar
+      <span>←</span>
+      <span>Voltar</span>
     </button>
   );
 }
