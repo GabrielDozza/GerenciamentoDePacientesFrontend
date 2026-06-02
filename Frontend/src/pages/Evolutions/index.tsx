@@ -49,7 +49,7 @@ export function Evolutions() {
             <h3>{evolution.patient}</h3>
             <p>{evolution.description}</p>
             <span>{evolution.date}</span>
-            <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
+            <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", justifyContent: "center" }}>
               <DeleteButton onClick={() => handleDeleteEvolution(evolution.id, evolution.patient)} />
             </div>
           </div>

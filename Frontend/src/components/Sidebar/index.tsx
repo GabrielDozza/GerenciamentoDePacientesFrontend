@@ -29,7 +29,7 @@ export function Sidebar() {
 
       <div className="profile">
         <FaUserCircle className="user-icon" />
-        <p>Gabriel</p>
+        <p>Usuário</p>
       </div>
     </aside>
   );

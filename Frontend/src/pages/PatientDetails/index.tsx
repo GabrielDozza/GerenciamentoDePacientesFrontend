@@ -195,7 +195,7 @@ export function PatientDetails() {
           <p>{patient.origin}</p>
         </div>
 
-        <div className="form-actions" style={{ marginTop: "2rem" }}>
+        <div className="form-actions" style={{ marginTop: "2rem", justifyContent: "center" }}>
           <button type="button" className="button-secondary" onClick={() => navigate(`/edit-patient`, { state: patient })}>
             Editar
           </button>
@@ -252,8 +252,7 @@ export function PatientDetails() {
           )}
         </section>
 
-        <div className="form-actions">
-
+        <div className="form-actions" style={{ justifyContent: "center" }}>
           <button
             type="button"
             className="button-secondary"
@@ -261,19 +260,6 @@ export function PatientDetails() {
           >
             Voltar
           </button>
-
-          <button
-            type="button"
-            className="button-primary"
-            onClick={() =>
-              navigate("/edit-patient", {
-                state: patient,
-              })
-            }
-          >
-            Editar paciente
-          </button>
-
         </div>
 
       </div>
