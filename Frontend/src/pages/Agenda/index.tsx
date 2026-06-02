@@ -1,13 +1,13 @@
 import "./styles.css";
-
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 
 export function Agenda() {
   const navigate = useNavigate();
-  const events = [
+  const [events, setEvents] = useState([
     {
       id: 1,
       patient: "Maria Silva",
@@ -25,7 +25,13 @@ export function Agenda() {
       startTime: "10:00",
       endTime: "11:00",
     },
-  ];
+  ]);
+
+  const handleDeleteEvent = (eventId: number, eventTitle: string) => {
+    if (window.confirm(`Tem certeza que deseja deletar o evento "${eventTitle}"? Esta ação não pode ser desfeita.`)) {
+      setEvents(events.filter(e => e.id !== eventId));
+    }
+  };
 
   return (
     <Layout>
@@ -76,6 +82,25 @@ export function Agenda() {
                 {" "}
                 {event.endTime}
               </p>
+
+              <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
+                <button
+                  className="button-danger"
+                  onClick={() => handleDeleteEvent(event.id, event.title)}
+                  style={{
+                    backgroundColor: "#e74c3c",
+                    borderColor: "#c0392b",
+                    color: "white",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "4px",
+                    border: "1px solid",
+                    cursor: "pointer",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  Deletar
+                </button>
+              </div>
 
             </div>
 
