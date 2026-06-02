@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
+import { DeleteButton } from "../../components/DeleteButton";
 import "./styles.css";
 
 export function PatientDetails() {
@@ -198,9 +199,7 @@ export function PatientDetails() {
           <button type="button" className="button-secondary" onClick={() => navigate(`/edit-patient`, { state: patient })}>
             Editar
           </button>
-          <button type="button" className="button-danger" onClick={handleDeletePatient} style={{ backgroundColor: "#e74c3c", borderColor: "#c0392b" }}>
-            Deletar
-          </button>
+          <DeleteButton onClick={handleDeletePatient} />
         </div>
 
         <section className="patient-events">

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
+import { DeleteButton } from "../../components/DeleteButton";
 
 export function Evolutions() {
   const navigate = useNavigate();
@@ -47,24 +48,11 @@ export function Evolutions() {
           <div className="event-card" key={evolution.id}>
             <h3>{evolution.patient}</h3>
             <p>{evolution.description}</p>
-            <span>{evolution.date}</span>            <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
-              <button
-                className="button-danger"
-                onClick={() => handleDeleteEvolution(evolution.id, evolution.patient)}
-                style={{
-                  backgroundColor: "#e74c3c",
-                  borderColor: "#c0392b",
-                  color: "white",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "4px",
-                  border: "1px solid",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                }}
-              >
-                Deletar
-              </button>
-            </div>          </div>
+            <span>{evolution.date}</span>
+            <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
+              <DeleteButton onClick={() => handleDeleteEvolution(evolution.id, evolution.patient)} />
+            </div>
+          </div>
         )))}
       </div>
     </Layout>
