@@ -1,34 +1,71 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { BackButton } from "../../components/BackButton";
-import { DeleteButton } from "../../components/DeleteButton";
-import "./styles.css";
-
-const MOCK_EVOLUTIONS = [
-  { id: 1, patientId: 1, description: "Paciente apresentou melhora significativa.", date: "25/05/2026" },
-  { id: 2, patientId: 2, description: "Relatou dores musculares.", date: "24/05/2026" },
-  { id: 3, patientId: 1, description: "Reavaliação com estabilidade clínica.", date: "28/05/2026" },
-];
+import { deletePaciente, getPaciente } from "../../services/patients";
+import type { Patient } from "../../services/patients";
 
 export function PatientDetails() {
   const navigate = useNavigate();
   const location = useLocation();
-  const patient = location.state;
+  const initialPatient = location.state as Patient | undefined;
+  const [patient, setPatient] = useState<Patient | null>(initialPatient ?? null);
+  const [loading, setLoading] = useState(!initialPatient);
+  const [error, setError] = useState<string | null>(null);
 
-  const patientEvolutions = MOCK_EVOLUTIONS.filter((e) => e.patientId === patient?.id);
+  useEffect(() => {
+    if (!initialPatient?.id) {
+      return;
+    }
+
+    const loadPatient = async () => {
+      try {
+        const fetched = await getPaciente(initialPatient.id);
+        setPatient(fetched);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : String(err));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPatient();
+  }, [initialPatient]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <BackButton />
+        <div className="empty-state">
+          <h2>Carregando paciente...</h2>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!patient) {
     return (
       <Layout>
         <BackButton />
-        <div className="empty-state"><h2>Paciente não encontrado</h2></div>
+        <div className="empty-state">
+          <h2>Paciente não encontrado</h2>
+          {error && <p>{error}</p>}
+        </div>
       </Layout>
     );
   }
 
-  const handleDelete = () => {
-    if (window.confirm(`Excluir paciente "${patient.name}"?`)) navigate("/patients");
+  const handleDelete = async () => {
+    if (!window.confirm(`Excluir paciente "${patient.name}"?`)) {
+      return;
+    }
+
+    try {
+      await deletePaciente(patient.id);
+      navigate("/patients");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : String(err));
+    }
   };
 
   const fields = [
@@ -51,14 +88,14 @@ export function PatientDetails() {
           <div className="patient-avatar" style={{ width: 56, height: 56, fontSize: 22 }}>{patient.name[0]}</div>
           <div>
             <h1 style={{ fontSize: 22 }}>{patient.name}</h1>
-            <p style={{ color: "var(--text-muted)", fontSize: 14 }}>{patient.profession} · {patient.origin}</p>
+            <p style={{ color: "var(--text-muted)", fontSize: 14 }}>{patient.profession} • {patient.origin}</p>
           </div>
         </div>
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           <button className="button-secondary" onClick={() => navigate("/new-event", { state: { patient } })}>+ Novo Evento</button>
           <button className="button-secondary" onClick={() => navigate("/new-evolution", { state: { patient } })}>+ Nova Evolução</button>
           <button className="button-secondary" onClick={() => navigate("/edit-patient", { state: { patient } })}>Editar</button>
-          <DeleteButton onClick={handleDelete} />
+          <button className="button-secondary" onClick={handleDelete}>Excluir</button>
         </div>
       </div>
 
@@ -83,7 +120,7 @@ export function PatientDetails() {
           <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Nenhum evento registrado.</p>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {patient.events.map((event: any) => (
+            {patient.events.map((event) => (
               <div className="event-item" key={event.id}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <h3>{event.title}</h3>
@@ -101,17 +138,17 @@ export function PatientDetails() {
           <div className="section-title" style={{ marginBottom: 0, paddingBottom: 0, borderBottom: "none" }}>Histórico de Evoluções</div>
           <button className="new-patient-btn" style={{ padding: "6px 12px", fontSize: 13 }} onClick={() => navigate("/new-evolution", { state: { patient } })}>+ Nova Evolução</button>
         </div>
-        {!patientEvolutions.length ? (
+        {!patient.evolutions?.length ? (
           <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Nenhuma evolução registrada.</p>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {patientEvolutions.map((ev) => (
+            {patient.evolutions.map((ev) => (
               <div className="event-item" key={ev.id}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
                   <span className="info-label">Evolução</span>
                   <span style={{ fontSize: 12, color: "var(--text-muted)", background: "var(--border-light)", padding: "2px 8px", borderRadius: 20 }}>{ev.date}</span>
                 </div>
-                <p style={{ fontSize: 14, color: "var(--text)" }}>{ev.description}</p>
+                <p style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.6 }}>{ev.description}</p>
               </div>
             ))}
           </div>

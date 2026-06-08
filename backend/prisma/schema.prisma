@@ -52,7 +52,7 @@ model Evolucao {
   pacienteId    Int
   titulo        String
   data          DateTime
-  horarioInicio DateTime
-  horarioFim    DateTime
+  horarioInicio String
+  horarioFim    String
   descricao     String
 }

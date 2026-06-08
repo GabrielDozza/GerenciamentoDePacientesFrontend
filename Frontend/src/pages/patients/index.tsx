@@ -1,30 +1,48 @@
 import "./styles.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "../../components/Layout";
 import { Header } from "../../components/Header";
-
-const MOCK_PATIENTS = [
-  { id: 1, name: "Maria Silva", birthDate: "15/03/1985", phone: "(51) 99999-9999", email: "maria@email.com", cpf: "111.111.111-11", address: "Rua das Flores, 120", profession: "Psicóloga", origin: "Rio de Janeiro, BR",
-    events: [{ id: 1, title: "Consulta inicial", date: "10/06/2026", startTime: "14:00", endTime: "15:00" }] },
-  { id: 2, name: "João Pereira", birthDate: "20/07/1980", phone: "(51) 98888-8888", email: "joao@email.com", cpf: "222.222.222-22", address: "Av. Central, 450", profession: "Dentista", origin: "São Paulo, BR",
-    events: [{ id: 1, title: "Avaliação", date: "11/06/2026", startTime: "10:00", endTime: "11:00" }] },
-  { id: 3, name: "Ana Costa", birthDate: "10/12/1985", phone: "(51) 97777-7777", email: "ana@email.com", cpf: "333.333.333-33", address: "Rua Verde, 89", profession: "Fisioterapeuta", origin: "Porto Alegre, BR", events: [] },
-];
+import { getPacientes, deletePaciente } from "../../services/patients";
+import type { Patient } from "../../services/patients";
 
 export function Patients() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [patients, setPatients] = useState(MOCK_PATIENTS);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPatients = async () => {
+      try {
+        const data = await getPacientes();
+        setPatients(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : String(err));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPatients();
+  }, []);
 
   const filtered = useMemo(
     () => patients.filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase())),
     [patients, searchTerm]
   );
 
-  const handleDelete = (id: number, name: string) => {
-    if (window.confirm(`Excluir paciente "${name}"? Esta ação não pode ser desfeita.`)) {
-      setPatients(patients.filter((p) => p.id !== id));
+  const handleDelete = async (id: number, name: string) => {
+    if (!window.confirm(`Excluir paciente "${name}"? Esta ação não pode ser desfeita.`)) {
+      return;
+    }
+
+    try {
+      await deletePaciente(id);
+      setPatients((current) => current.filter((p) => p.id !== id));
+    } catch (err) {
+      alert(err instanceof Error ? err.message : String(err));
     }
   };
 
@@ -41,7 +59,16 @@ export function Patients() {
         }
       />
 
-      {filtered.length === 0 ? (
+      {loading ? (
+        <div className="empty-state">
+          <h2>Carregando pacientes...</h2>
+        </div>
+      ) : error ? (
+        <div className="empty-state">
+          <h2>Erro ao buscar pacientes</h2>
+          <p>{error}</p>
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="empty-state">
           <h2>Nenhum paciente encontrado</h2>
           <p>Tente outro nome ou cadastre um novo paciente.</p>
