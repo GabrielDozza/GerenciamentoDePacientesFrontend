@@ -2,7 +2,6 @@
 /dist
 /node_modules
 /build
-backend/banco-completo.tar
 
 # Logs
 logs
