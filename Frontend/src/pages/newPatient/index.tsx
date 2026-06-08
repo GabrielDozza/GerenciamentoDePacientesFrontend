@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "../../components/Layout";
 import { BackButton } from "../../components/BackButton";
+import { createPaciente } from "../../services/patients";
 
 export function NewPatient() {
   const navigate = useNavigate();
@@ -14,10 +15,31 @@ export function NewPatient() {
   const [cpf, setCpf] = useState("");
   const [address, setAddress] = useState("");
   const [origin, setOrigin] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/patients");
+    setError(null);
+    setSaving(true);
+
+    try {
+      await createPaciente({
+        name,
+        birthDate,
+        phone,
+        email,
+        cpf,
+        address,
+        profession,
+        origin,
+      });
+      navigate("/patients");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -26,6 +48,7 @@ export function NewPatient() {
       <h1 style={{ fontSize: 22, marginBottom: 24 }}>Novo Paciente</h1>
 
       <form className="form-container" onSubmit={handleSubmit}>
+        {error && <div className="form-error">{error}</div>}
         <div className="form-row">
           <div className="form-group">
             <label>Nome completo *</label>
@@ -66,7 +89,9 @@ export function NewPatient() {
         </div>
         <div className="form-actions">
           <button type="button" className="button-secondary" onClick={() => navigate(-1)}>Cancelar</button>
-          <button type="submit" className="button-primary">Salvar Paciente</button>
+          <button type="submit" className="button-primary" disabled={saving}>
+            {saving ? "Salvando..." : "Salvar Paciente"}
+          </button>
         </div>
       </form>
     </Layout>
