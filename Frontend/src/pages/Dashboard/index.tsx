@@ -62,19 +62,21 @@ export function Dashboard() {
         ) : (
           <>
             <section className="cards">
-              <div className="card">
+              <div className="card"  onClick={() => navigate("/patients")}
+                  style={{ cursor: "pointer" }}>
                 <div className="card-icon green">👥</div>
                 <h3>Total de Pacientes</h3>
                 <div className="card-value">{totalPacientes}</div>
                 <p>{Math.max(0, totalPacientes - 1)} novos este mês</p>
               </div>
-              <div className="card">
+              <div className="card"onClick={() => navigate("/agenda")}
+                style={{ cursor: "pointer" }}>
                 <div className="card-icon green">📅</div>
                 <h3>Consultas Hoje</h3>
                 <div className="card-value">{todayEvents.length}</div>
                 <p>{todayEvents.length} agendado{todayEvents.length !== 1 ? "s" : ""}</p>
               </div>
-              <div className="card">
+              <div className="card" onClick={() => navigate("/evolutions")} style={{ cursor: "pointer" }}>
                 <div className="card-icon yellow">📋</div>
                 <h3>Evoluções</h3>
                 <div className="card-value">{totalEvolucoes}</div>

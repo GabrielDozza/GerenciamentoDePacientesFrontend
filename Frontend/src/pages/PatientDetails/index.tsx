@@ -8,7 +8,7 @@ import type { Patient } from "../../services/patients";
 export function PatientDetails() {
   const navigate = useNavigate();
   const location = useLocation();
-  const initialPatient = location.state as Patient | undefined;
+  const initialPatient = (location.state as { patient: Patient } | undefined)?.patient;
   const [patient, setPatient] = useState<Patient | null>(initialPatient ?? null);
   const [loading, setLoading] = useState(!initialPatient);
   const [error, setError] = useState<string | null>(null);

@@ -76,7 +76,14 @@ export function Patients() {
       ) : (
         <section className="patients-grid">
           {filtered.map((patient) => (
-            <div className="patient-card" key={patient.id}>
+            <div
+              className="patient-card"
+              key={patient.id}
+              onClick={() => navigate("/patient-details", {
+              state: { patient }
+              })}
+              style={{ cursor: "pointer" }}
+            >
               <div className="patient-card-header">
                 <div className="patient-avatar">{patient.name[0]}</div>
                 <div>
@@ -91,15 +98,33 @@ export function Patients() {
               <p><strong>CPF:</strong> {patient.cpf}</p>
 
               <div className="card-buttons">
-                <button onClick={() => navigate("/patient-details", { state: patient })}>
+                <button
+                  onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/patient-details", { state: { patient } });
+                  }}
+                >
                   Ver detalhes
                 </button>
-                <button onClick={() => navigate("/edit-patient", { state: { patient } })}>
+
+                <button
+                  onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/edit-patient", { state: { patient } });
+                  }}
+                >
                   Editar
                 </button>
-                <button className="delete-button" onClick={() => handleDelete(patient.id, patient.name)}>
+
+                <button
+                  className="delete-button"
+                    onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(patient.id, patient.name);
+                    }}
+                >
                   Excluir
-                </button>
+             </button>
               </div>
             </div>
           ))}
