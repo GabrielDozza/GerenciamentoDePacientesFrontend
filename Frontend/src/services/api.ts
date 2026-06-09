@@ -20,7 +20,7 @@ async function fetchJson(url: string, options: RequestInit = {}) {
 
   const token = getAuthToken();
   if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
+    headers.set("Authorization", token);
   }
 
   const response = await fetch(url.startsWith("http") ? url : url, {
