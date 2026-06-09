@@ -17,9 +17,9 @@
   --success-bg: #ECFDF5;
   --warning: #F59E0B;
   --warning-bg: #FFFBEB;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 24px rgba(0,0,0,0.10);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.10);
   --radius: 12px;
   --radius-sm: 8px;
   --radius-lg: 16px;
@@ -34,8 +34,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-body, html { margin: 0; width: 100%; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  width: 100%;
+}
 
 #root {
   width: 100%;
@@ -44,9 +53,22 @@ body, html { margin: 0; width: 100%; }
   flex-direction: column;
 }
 
-h1, h2, h3, h4 { margin: 0; font-weight: 600; color: var(--text); }
-p { margin: 0; }
-a { text-decoration: none; }
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
 
 /* ── Layout ── */
 .layout-container,
@@ -165,7 +187,8 @@ a { text-decoration: none; }
   font-weight: 600;
 }
 
-.sidebar a svg, .sidebar a .nav-icon {
+.sidebar a svg,
+.sidebar a .nav-icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
@@ -199,9 +222,21 @@ a { text-decoration: none; }
   flex-shrink: 0;
 }
 
-.profile-info { flex: 1; min-width: 0; }
-.profile-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.profile-role { font-size: 11px; color: var(--text-muted); }
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.profile-role {
+  font-size: 11px;
+  color: var(--text-muted);
+}
 
 /* ── Header ── */
 .header {
@@ -254,38 +289,107 @@ a { text-decoration: none; }
   background: var(--primary);
   color: white;
 }
-.btn-primary:hover { background: var(--primary-hover); }
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
 
 .btn-secondary {
   background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
 }
-.btn-secondary:hover { background: var(--border-light); }
+
+.btn-secondary:hover {
+  background: var(--border-light);
+}
 
 .btn-danger {
   background: var(--danger-bg);
   color: var(--danger);
   border: 1px solid #FECACA;
 }
-.btn-danger:hover { background: var(--danger); color: white; }
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
 
 .btn-ghost {
   background: transparent;
   color: var(--text-muted);
   padding: 8px 10px;
 }
-.btn-ghost:hover { background: var(--border-light); color: var(--text); }
+
+.btn-ghost:hover {
+  background: var(--border-light);
+  color: var(--text);
+}
 
 /* Legacy classes (compatibility) */
-.button-primary { @extend .btn; @extend .btn-primary; background: var(--primary); color: white; padding: 10px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
-.button-primary:hover { background: var(--primary-hover); }
-.button-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-.button-secondary:hover { background: var(--border-light); }
-.button-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid #FECACA; padding: 10px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-.button-danger:hover { background: var(--danger); color: white; }
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
 
-.new-patient-btn, .new-button {
+.button-primary:hover {
+  background: var(--primary-hover);
+}
+
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.button-secondary:hover {
+  background: var(--border-light);
+}
+
+.button-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #FECACA;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.button-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.new-patient-btn,
+.new-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -300,7 +404,11 @@ a { text-decoration: none; }
   transition: background 0.15s;
   white-space: nowrap;
 }
-.new-patient-btn:hover, .new-button:hover { background: var(--primary-hover); }
+
+.new-patient-btn:hover,
+.new-button:hover {
+  background: var(--primary-hover);
+}
 
 /* ── Back button ── */
 .back-button {
@@ -317,7 +425,10 @@ a { text-decoration: none; }
   margin-bottom: 20px;
   transition: color 0.15s;
 }
-.back-button:hover { color: var(--primary); }
+
+.back-button:hover {
+  color: var(--primary);
+}
 
 /* ── Cards (Dashboard) ── */
 .cards {
@@ -336,7 +447,9 @@ a { text-decoration: none; }
   transition: box-shadow 0.2s;
 }
 
-.card:hover { box-shadow: var(--shadow); }
+.card:hover {
+  box-shadow: var(--shadow);
+}
 
 .card-icon {
   width: 44px;
@@ -349,9 +462,17 @@ a { text-decoration: none; }
   margin-bottom: 16px;
 }
 
-.card-icon.green { background: var(--primary-light); }
-.card-icon.green { background: var(--success-bg); }
-.card-icon.yellow { background: var(--warning-bg); }
+.card-icon.green {
+  background: var(--primary-light);
+}
+
+.card-icon.green {
+  background: var(--success-bg);
+}
+
+.card-icon.yellow {
+  background: var(--warning-bg);
+}
 
 .card h3 {
   font-size: 13px;
@@ -428,7 +549,9 @@ a { text-decoration: none; }
 }
 
 .form-group input::placeholder,
-.form-group textarea::placeholder { color: var(--text-light); }
+.form-group textarea::placeholder {
+  color: var(--text-light);
+}
 
 .form-actions {
   display: flex;
@@ -502,7 +625,10 @@ a { text-decoration: none; }
   gap: 6px;
 }
 
-.patient-card p strong { color: var(--text); font-weight: 600; }
+.patient-card p strong {
+  color: var(--text);
+  font-weight: 600;
+}
 
 .card-buttons {
   display: flex;
@@ -525,9 +651,22 @@ a { text-decoration: none; }
   min-width: 0;
 }
 
-.card-buttons button:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
-.card-buttons button.delete-button { color: var(--danger); border-color: #FECACA; background: var(--danger-bg); }
-.card-buttons button.delete-button:hover { background: var(--danger); color: white; }
+.card-buttons button:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.card-buttons button.delete-button {
+  color: var(--danger);
+  border-color: #FECACA;
+  background: var(--danger-bg);
+}
+
+.card-buttons button.delete-button:hover {
+  background: var(--danger);
+  color: white;
+}
 
 /* ── Events / Evolutions ── */
 .agenda-header {
@@ -537,7 +676,9 @@ a { text-decoration: none; }
   margin-bottom: 24px;
 }
 
-.agenda-header h2 { font-size: 16px; }
+.agenda-header h2 {
+  font-size: 16px;
+}
 
 .events-list {
   display: flex;
@@ -554,7 +695,9 @@ a { text-decoration: none; }
   transition: box-shadow 0.15s;
 }
 
-.event-card:hover { box-shadow: var(--shadow); }
+.event-card:hover {
+  box-shadow: var(--shadow);
+}
 
 .event-card h3 {
   font-size: 15px;
@@ -578,13 +721,15 @@ a { text-decoration: none; }
 }
 
 /* Patient details sections */
-.patient-events, .patient-evolutions {
+.patient-events,
+.patient-evolutions {
   margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
-.patient-events h2, .patient-evolutions h2 {
+.patient-events h2,
+.patient-evolutions h2 {
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -596,8 +741,15 @@ a { text-decoration: none; }
   margin-bottom: 10px;
 }
 
-.event-item h3 { font-size: 14px; margin-bottom: 6px; }
-.event-item p { font-size: 13px; color: var(--text-muted); }
+.event-item h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.event-item p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
 
 /* ── Patient icon (react-icons) ── */
 .patient-icon {
@@ -619,8 +771,15 @@ a { text-decoration: none; }
   color: var(--text-muted);
 }
 
-.empty-state h2 { font-size: 16px; margin-bottom: 8px; color: var(--text-muted); }
-.empty-state p { font-size: 14px; }
+.empty-state h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.empty-state p {
+  font-size: 14px;
+}
 
 /* ── Page sections ── */
 .section-card {
@@ -651,7 +810,9 @@ a { text-decoration: none; }
   border-bottom: 1px solid var(--border-light);
 }
 
-.info-row:last-child { border-bottom: none; }
+.info-row:last-child {
+  border-bottom: none;
+}
 
 .info-label {
   font-size: 11px;
@@ -675,10 +836,29 @@ a { text-decoration: none; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .sidebar { display: none; }
-  .layout-content, .content { padding: 20px; }
-  .patients-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .cards { grid-template-columns: 1fr; }
-  .patients-header { flex-direction: column; align-items: flex-start; }
+  .sidebar {
+    display: none;
+  }
+
+  .layout-content,
+  .content {
+    padding: 20px;
+  }
+
+  .patients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .patients-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
