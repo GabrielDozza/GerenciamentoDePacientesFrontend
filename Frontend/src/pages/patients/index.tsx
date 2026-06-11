@@ -53,7 +53,7 @@ export function Patients() {
         searchValue={searchTerm}
         onSearch={setSearchTerm}
         action={
-          <button className="new-patient-btn" onClick={() => navigate("/new-patient") }>
+          <button className="new-patient-btn" onClick={() => navigate("/new-patient")}>
             + Novo Paciente
           </button>
         }
@@ -80,12 +80,23 @@ export function Patients() {
               className="patient-card"
               key={patient.id}
               onClick={() => navigate("/patient-details", {
-              state: { patient }
+                state: { patient }
               })}
               style={{ cursor: "pointer" }}
             >
               <div className="patient-card-header">
-                <div className="patient-avatar">{patient.name[0]}</div>
+                <div className="patient-avatar">
+                  {patient?.profilePicture? (
+                    <img
+                    // <img alt="Foto do profissional" class="profile-avatar-image" src="data:image/png;base64,
+                      src={`data:image/png;base64,${patient.profilePicture}`}
+                      alt="Foto do profissional"
+                      className="profile-avatar-image"
+                    />
+                  ) : (
+                    patient?.name?.[0] ?? "U"
+                  )}
+                </div>
                 <div>
                   <h3>{patient.name}</h3>
                   <p style={{ fontSize: 12, marginTop: 2 }}>{patient.profession}</p>
@@ -100,8 +111,8 @@ export function Patients() {
               <div className="card-buttons">
                 <button
                   onClick={(e) => {
-                  e.stopPropagation();
-                  navigate("/patient-details", { state: { patient } });
+                    e.stopPropagation();
+                    navigate("/patient-details", { state: { patient } });
                   }}
                 >
                   Ver detalhes
@@ -109,8 +120,8 @@ export function Patients() {
 
                 <button
                   onClick={(e) => {
-                  e.stopPropagation();
-                  navigate("/edit-patient", { state: { patient } });
+                    e.stopPropagation();
+                    navigate("/edit-patient", { state: { patient } });
                   }}
                 >
                   Editar
@@ -118,13 +129,13 @@ export function Patients() {
 
                 <button
                   className="delete-button"
-                    onClick={(e) => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     handleDelete(patient.id, patient.name);
-                    }}
+                  }}
                 >
                   Excluir
-             </button>
+                </button>
               </div>
             </div>
           ))}

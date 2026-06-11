@@ -10,6 +10,7 @@ type PatientApi = {
   endereco?: string | null;
   profissao?: string | null;
   origem?: string | null;
+  fotoPerfil?: string | null;
   eventos: EventApi[];
   evolucoes: EvolutionApi[];
 };
@@ -43,6 +44,7 @@ export type Patient = {
   address: string;
   profession: string;
   origin: string;
+  profilePicture?: string;
   events: Event[];
   evolutions: Evolution[];
 };
@@ -108,6 +110,7 @@ function normalizePatient(patient: PatientApi) {
     address: patient.endereco ?? "",
     profession: patient.profissao ?? "",
     origin: patient.origem ?? "",
+    profilePicture: patient.fotoPerfil ?? "",
     events: patient.eventos.map((event) => normalizeEvent(event, patient.nome)),
     evolutions: patient.evolucoes.map((evo) => normalizeEvolution(evo, patient.nome)),
   };

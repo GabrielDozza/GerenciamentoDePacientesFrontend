@@ -85,7 +85,18 @@ export function PatientDetails() {
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28, flexWrap: "wrap", gap: 12 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div className="patient-avatar" style={{ width: 56, height: 56, fontSize: 22 }}>{patient.name[0]}</div>
+          <div className="patient-avatar" style={{ width: 56, height: 56, fontSize: 22 }}>
+            {patient?.profilePicture? (
+                    <img
+                    // <img alt="Foto do profissional" class="profile-avatar-image" src="data:image/png;base64,
+                      src={`data:image/png;base64,${patient.profilePicture}`}
+                      alt="Foto do profissional"
+                      className="profile-avatar-image"
+                    />
+                  ) : (
+                    patient?.name?.[0] ?? "U"
+                  )}
+          </div>
           <div>
             <h1 style={{ fontSize: 22 }}>{patient.name}</h1>
             <p style={{ color: "var(--text-muted)", fontSize: 14 }}>{patient.profession} • {patient.origin}</p>
