@@ -11,8 +11,8 @@ type PatientApi = {
   profissao?: string | null;
   origem?: string | null;
   fotoPerfil?: string | null;
-  eventos: EventApi[];
-  evolucoes: EvolutionApi[];
+  eventos?: EventApi[];
+  evolucoes?: EvolutionApi[];
 };
 
 type EventApi = {
@@ -111,8 +111,10 @@ function normalizePatient(patient: PatientApi) {
     profession: patient.profissao ?? "",
     origin: patient.origem ?? "",
     profilePicture: patient.fotoPerfil ?? "",
-    events: patient.eventos.map((event) => normalizeEvent(event, patient.nome)),
-    evolutions: patient.evolucoes.map((evo) => normalizeEvolution(evo, patient.nome)),
+    events: (patient.eventos ?? []).map((event) =>
+      normalizeEvent(event, patient.nome)),
+    evolutions: (patient.evolucoes ?? []).map((evo) =>
+      normalizeEvolution(evo, patient.nome)),
   };
 }
 

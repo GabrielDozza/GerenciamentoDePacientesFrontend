@@ -93,15 +93,15 @@ a {
 /* ── Sidebar ── */
 .sidebar {
   width: var(--sidebar-width);
-  min-height: 100vh;
+  height: 100vh;
   background: var(--surface);
   border-right: 1px solid var(--border);
   padding: 0;
   display: flex;
   flex-direction: column;
-  position: sticky;
+  position: fixed;
   top: 0;
-  flex-shrink: 0;
+  left: 0;
 }
 
 .sidebar-logo {
