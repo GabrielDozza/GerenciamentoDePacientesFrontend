@@ -2,7 +2,7 @@ import "./styles.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { clearAuthToken } from "../../services/api";
+import { clearAuthToken, getAuthToken, verifyToken } from "../../services/api";
 import { getProfessional, type Professional } from "../../services/professionals";
 
 export function Sidebar() {
@@ -14,7 +14,12 @@ export function Sidebar() {
     async function loadProfessional() {
       try {
         // temporário
-        const data = await getProfessional(1);
+        // Ajuste possivelmente temporario do Baltazar
+        const token = localStorage.getItem("lume_system_token") ?? "";
+        const dadosToken = await verifyToken(token);
+        // console.log(dadosToken.id);
+
+        const data = await getProfessional(dadosToken.id);
 
         setProfessional(data);
       } catch (error) {
@@ -93,10 +98,10 @@ export function Sidebar() {
           <div className="profile-avatar">
             {professional?.fotoPerfil ? (
               <img
-  src={`data:image/png;base64,${professional.fotoPerfil}`}
-  alt="Foto do profissional"
-  className="profile-avatar-image"
-/>
+                src={`data:image/png;base64,${professional.fotoPerfil}`}
+                alt="Foto do profissional"
+                className="profile-avatar-image"
+              />
             ) : (
               professional?.nome?.[0] ?? "U"
             )}

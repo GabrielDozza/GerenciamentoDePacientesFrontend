@@ -32,3 +32,7 @@
   height: 100%;
   object-fit: cover;
 }
+
+.sidebar {
+  height: 100vh;
+}

@@ -1,13 +1,13 @@
 import { Navigate, Routes, Route } from "react-router-dom";
 
 import { Dashboard } from "./pages/Dashboard";
-import { Patients } from "./pages/Patients";
+import { Patients } from "./pages/patients";
 import { PatientDetails } from "./pages/PatientDetails";
-import { NewPatient } from "./pages/NewPatient";
+import { NewPatient } from "./pages/newPatient";
 import { EditPatient } from "./pages/EditPatient";
 import { NewEvent } from "./pages/NewEvent";
 import { NewEvolution } from "./pages/NewEvolution";
-import { Login } from "./pages/Login";
+import { Login } from "./pages/login";
 import { Agenda } from "./pages/Agenda";
 import { Evolutions } from "./pages/Evolutions";
 

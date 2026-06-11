@@ -60,13 +60,18 @@ export async function loginApi(email: string, senha: string) {
   });
 }
 
-export async function verifyToken() {
+export async function verifyToken(token: string) {
   return fetchJson("/auth/token", {
     method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   });
 }
 
 export async function getApi<T>(path: string) {
+  console.log("getApi", path);
+
   return fetchJson(path, { method: "GET" }) as Promise<T>;
 }
 
